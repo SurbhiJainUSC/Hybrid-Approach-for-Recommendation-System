@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block nav %}
+	<b>Welcome User {{user.username}}</b>
+{% endblock %}
+
+</br>
+</br>
+
+{% block a %}
+	{% if user.username %}
+		{% if len %}
+			<h2>Your Recommendations:</h2>
+
+			{% for i in result  %}
+				<div class="col-md-6 col-lg-2 movie-tile text-center" style="height:250px">
+								<img src="{% static 'img/' %}{{ i.number }}.jpg" width="120" height="142">
+							    <h5 style="color:black;font-size:150%">{{ i.m_name }}</h5>
+							    
+			    </div>
+			{% endfor %}
+		{% endif %}
+		{% if not len %}
+			<h2>There is no movie in the cart!!</h2>
+		{% endif %}
+		
+
+	{% endif %}
+{% endblock %}
+	
+
+

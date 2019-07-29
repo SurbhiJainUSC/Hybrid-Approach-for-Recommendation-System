@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block nav %}
+	<b>Welcome User {{user.username}}</b>
+{% endblock %}
+
+</br>
+</br>
+
+
+{% block a %}
+	{% if user.username %}
+	<h3>Your History :</h3>
+			{% for i in history  %}
+				<div class="col-md-6 col-lg-2 movie-tile text-center" style="height:250px">
+								<img src="{% static 'img/' %}{{ i.movieid }}.jpg" width="120" height="142">
+							    <h5 style="color:black;font-size:150%">{{ i.mname }}</h5>
+							    
+			    </div>
+			{% endfor %}
+
+	{% endif %}
+{% endblock %}
+	
+
+

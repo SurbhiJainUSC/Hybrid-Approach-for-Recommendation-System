@@ -1,0 +1,156 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Recommender Engine</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/navbar-static-top.css' %}" rel="stylesheet">
+    <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" media="all" />
+     <script src="{% static 'js/query.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}" type="text/javascript"></script>
+    </script> <script src="{% static 'js/jquery-ui.min.js' %}" type="text/javascript"></script>
+
+
+<script> 
+    $(function() {
+      $("#id_code1").autocomplete({
+        source: "/ajax_calls/myFunction/",
+        minLength: 1,
+      });
+      
+     });
+</script>
+
+
+    <style type="text/css" media="screen">
+            body
+            {
+                background-color: #EEE;
+            }
+            .movie-tile {
+                margin-bottom:25px;
+                padding-top: 25px;
+            }
+            .movie-tile:hover {
+                background-color: #FFF;
+                cursor: pointer;
+            }
+            .nav-color {
+                background-color:#2D3E50;
+            }
+            .navbar-default .navbar-nav>li>a {
+                color: #FFF;
+            }
+            .navbar-default .navbar-nav>li>a:hover {
+                color: #FFF;
+            }
+            .ui-autocomplete {
+                top: 5.5% !important;
+                right: 32.5% !important;
+                left: 45.1% !important;
+                
+            }
+            .my-btn
+            {
+                background-color: #2D3E50;
+                color:#FFF;
+
+            }
+            .big-btn
+            {
+                width:380px;
+            }
+    </style>
+
+	<!-- Latest compiled and minified CSS -->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top nav-color">
+      <div class="container">
+        
+        <div id="navbar" class="navbar-collapse collapse" >
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/movie/">HOME</a></li>
+            <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">GENRES <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/action/">Action</a></li>
+                    <li><a href="/adventure/">Adventure</a></li>
+                    <li><a href="/animation/">Animation</a></li>
+                    <li><a href="/children/">Children</a></li>
+                    <li><a href="/comedy/">Comedy</a></li>
+                    <li><a href="/crime/">Crime</a></li>
+                    <li><a href="/documentary/">Documentary</a></li>
+                    <li><a href="/drama/">Drama</a></li>
+                    <li><a href="/fantasy/">Fantasy</a></li>
+                    <li><a href="/filmnoir/">Film Noir</a></li>
+                    <li><a href="/horror/">Horror</a></li>
+                    <li><a href="/musical/">Musical</a></li>
+                    <li><a href="/mystery/">Mystery</a></li>
+                    <li><a href="/romance/">Romance</a></li>
+                    <li><a href="/scifi/">Sci Fi</a></li>
+                    <li><a href="/thriller/">Thriller</a></li>
+                    <li><a href="/war/">War</a></li>
+                    <li><a href="/western/">Western</a></li>
+                   </ul>
+            </li>
+           </ul>
+            
+         <ul class="nav navbar-nav navbar-right">
+            <li><form class="navbar-form" role="search" action="/movie/cart/" method="post">
+            {% csrf_token %}
+            <div class="ui-widget">
+               <!-- <label for="id_code1" style="color:#FFF">Your Movie:</label> -->
+                <input class="ui-autocomplete-input" aria-haspopup="true" aria-autocomplete="list" role="textbox" autocomplete="off" id="id_code1" name="code1" placeholder="Search" maxlength="100" type="text" style="width:300px">
+                <input value="Add To Cart" type="submit">
+            </div>
+            </form></li>
+            {% if user.username %}
+                  <li><a href=".">{% block nav %}{% endblock %}</a></li>
+                  <li><a href="/profile/">Cart</a></li>
+                  <li><a href="/history/">History</a></li>
+                   <li><a href="/logout/">LogOut</a></li>
+            {% endif %}
+
+            {% if not user.username %}
+                  <li><a href="/">Login</a></li>
+            {% endif %}         
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    
+    </nav>
+
+    <div class="container">
+        </br></br></br>
+       
+       
+
+        {% block a %}
+
+        {% endblock %}    
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>

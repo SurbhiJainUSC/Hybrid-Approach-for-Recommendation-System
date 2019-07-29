@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block nav %}
+	<b>Welcome User {{user.username}}</b>
+{% endblock %}
+
+
+{% block a %}
+	{% if user.username %}
+
+		{% for i in namelist %}
+				<div class="col-md-6 col-lg-2 movie-tile text-center" style="height:250px">
+					<img src="{% static 'img/' %}{{ i.ro_number }}.jpg" width="120" height="142">
+				    <h5 style="color:black;font-size:130%">{{i.ro_name}}</h5>
+				</div>
+		
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+	

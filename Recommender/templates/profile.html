@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block nav %}
+	<b>Welcome User {{user.username}}</b>
+{% endblock %}
+
+</br>
+</br>
+
+
+{% block a %}
+	{% if user.username %}
+	
+		{% if not len %}
+			<h3>Your cart is empty!!</h3>
+		{% endif %}
+		{% if len %}
+			<a class='btn btn-lg btn-block my-btn' href="/movie/recommend/">ADAPTIVE ASSOCIATION RULE MINING</a></br>
+			<a class='btn btn-lg my-btn' href="/movie/cf/">USER COLLABORATIVE FILTERING</a>
+			<a class='btn btn-lg my-btn' href="/movie/item/">ITEM TO ITEM COLLABORATIVE FILTERING</a>
+			<a class='btn btn-lg my-btn big-btn' href="/movie/arm/">ASSOCIATION RULE MINING</a>
+			
+			<h3>Your Cart :</h3>
+			{% for i in items  %}
+				<div class="col-md-6 col-lg-2 movie-tile text-center" style="height:250px">
+								<img src="{% static 'img/' %}{{ i.number }}.jpg" width="120" height="142">
+							    <h5 style="color:black;font-size:150%">{{ i.mname }}</h5>
+							    <form action="/movie/delete/" method="post" >
+							    	{% csrf_token %}
+			           				<input type="hidden" name="mid" value={{i.number}} >
+			            			<input value="Remove" type="submit" >
+			        			</form>
+			    </div>
+			{% endfor %}
+		{% endif %}
+
+	{% endif %}
+{% endblock %}
+	
+
+
